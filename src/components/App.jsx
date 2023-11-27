@@ -3,7 +3,7 @@ import { GlobalStyle } from '../GlobalStyle';
 import HomePage from 'pages/HomePage';
 import MoviesPage from 'pages/MoviesPage';
 import MovieDetailsPage from 'pages/MovieDetailsPage/MovieDetailsPage';
-import NotFoundPage from 'pages/NotFoundPage';
+// import NotFoundPage from 'pages/NotFoundPage';
 
 export const App = () => {
   return (
