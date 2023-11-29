@@ -1,13 +1,20 @@
 import { getActorsMovies } from 'services/api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { MdNoPhotography } from 'react-icons/md';
 
 import { ErrorMessage, LoadingMessage } from 'pages/Homepage/HomePage.styled';
+import {
+  CastList,
+  CastItem,
+  StyledCharacter,
+  InfoContainer,
+} from './Cast.styled';
 
 export default function Cast() {
   const params = useParams();
 
-  const [cast, setCast] = useState(null);
+  const [cast, setCast] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,7 +26,7 @@ export default function Cast() {
 
         console.log(fetchedCast);
 
-        setCast(fetchedCast);
+        setCast(fetchedCast.cast);
       } catch (error) {
         setError(true);
       } finally {
@@ -38,25 +45,28 @@ export default function Cast() {
       )}
       {isLoading && <LoadingMessage>Loading...</LoadingMessage>}
       {cast && cast.length > 0 && (
-        <div>
-          <ul>
-            {cast.map(actors => (
-              <li key={actors.id}>
-                <img
-                  width="200px"
-                  src={
-                    actors.profile_path
-                      ? `https://image.tmdb.org/t/p/w500${actors.profile_path}`
-                      : ''
-                  }
-                  alt={actors.name}
-                />
-                <p>{actors.name}</p>
-                <p>Character: {actors.character}</p>
-              </li>
+        <InfoContainer>
+          <CastList>
+            {cast.map(actor => (
+              <CastItem key={actor.id}>
+                {actor.profile_path ? (
+                  <img
+                    width="150px"
+                    height="300px"
+                    src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+                    alt={actor.name}
+                  />
+                ) : (
+                  <MdNoPhotography
+                    style={{ width: '100px', height: '150px' }}
+                  />
+                )}
+                <p>{actor.name}</p>
+                <StyledCharacter>Character: {actor.character}</StyledCharacter>
+              </CastItem>
             ))}
-          </ul>
-        </div>
+          </CastList>
+        </InfoContainer>
       )}
     </>
   );
