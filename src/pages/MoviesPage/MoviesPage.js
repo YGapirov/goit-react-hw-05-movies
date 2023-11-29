@@ -1,5 +1,5 @@
 import { Searchbar } from 'components/Searchbar/SearchBar';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { searchMovies } from 'services/api';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 
