@@ -5,7 +5,7 @@ import { StyledHeader, StyledList, StyledNavLink } from './Layout.styled';
 
 export const Layout = () => {
   return (
-    <div>
+    <>
       <StyledHeader>
         <nav>
           <StyledList>
@@ -22,6 +22,6 @@ export const Layout = () => {
         <Outlet />
       </main>
       <GlobalStyle />
-    </div>
+    </>
   );
 };

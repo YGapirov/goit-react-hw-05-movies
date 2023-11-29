@@ -2,7 +2,7 @@ import { Searchbar } from 'components/Searchbar/SearchBar';
 import { useState } from 'react';
 import { searchMovies } from 'services/api';
 import { MoviesList } from 'components/MoviesList/MoviesList';
-
+import { Loader } from 'components/Loader/Loader';
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
@@ -23,7 +23,7 @@ export default function MoviesPage() {
   return (
     <div>
       <Searchbar onSubmit={handleSearch} />
-      {isLoading && <p>Loading...</p>}
+      <Loader isLoading={isLoading} />
       {error && <p>Oops! Something went wrong. Please try again later.</p>}
       {movies.length > 0 && <MoviesList films={movies} />}
     </div>

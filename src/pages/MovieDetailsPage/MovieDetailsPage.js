@@ -2,6 +2,17 @@ import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getDetailsMovies } from 'services/api';
 
+import {
+  DetailsContainer,
+  MovieImage,
+  Overview,
+  AdditionalInfo,
+  MovieInfo,
+  AddList,
+} from './MovieDetailsPage.styled.js';
+
+import { ErrorMessage, LoadingMessage } from '../Homepage/HomePage.styled';
+
 export default function MovieDetailsPage() {
   const params = useParams();
 
@@ -29,46 +40,49 @@ export default function MovieDetailsPage() {
     movie && movie.vote_average ? Math.round(movie.vote_average * 10) : 0;
 
   return (
-    <div>
+    <>
       {error && (
-        <p>Oops! Something went wrong! Please try reloading this page!</p>
+        <ErrorMessage>
+          Oops! Something went wrong! Please try reloading this page!
+        </ErrorMessage>
       )}
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <LoadingMessage>Loading...</LoadingMessage>}
       {movie && (
-        <div>
-          <img
+        <DetailsContainer>
+          <MovieImage
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
-            style={{ width: '150px', height: '200px' }}
           />
-          <h1>{movie.title}</h1>
-          <p>User score: {getUserScore}%</p>
-          <h2>Overview</h2>
-          <p>{movie.overview}</p>
-          <h2>Genres</h2>
-          {movie.genres.map(
-            (
-              { name },
-              index //перебираємо масив мар жанрів, витягуємо назву жанрів та індекс поточного елемента
-            ) => (
-              <span key={index}>{name} </span> //відмальовуємо унікальний ключ "індекс" і рендерим нейм жанру
-            )
-          )}
-        </div>
+          <MovieInfo>
+            <h1>{movie.title}</h1>
+            <p>User score: {getUserScore}%</p>
+            <h2>Overview</h2>
+            <Overview>{movie.overview}</Overview>
+            <h2>Genres</h2>
+            {movie.genres.map(
+              (
+                { name },
+                index //перебираємо масив мар жанрів, витягуємо назву жанрів та індекс поточного елемента
+              ) => (
+                <span key={index}>{name} </span> //відмальовуємо унікальний ключ "індекс" і рендерим нейм жанру
+              )
+            )}
+          </MovieInfo>
+        </DetailsContainer>
       )}
-      <div>
+      <AdditionalInfo>
         <h3>Additional information</h3>
         <ul>
-          <li>
+          <AddList>
             <NavLink to="cast">Cast</NavLink>
-          </li>
-          <li>
+          </AddList>
+          <AddList>
             <NavLink to="reviews">Reviews</NavLink>
-          </li>
+          </AddList>
         </ul>
-      </div>
+      </AdditionalInfo>
 
       <Outlet />
-    </div>
+    </>
   );
 }

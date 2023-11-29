@@ -6,7 +6,7 @@ import {
   TrendingTitle,
   ErrorMessage,
   LoadingMessage,
-} from '../Homepage/HomePage.styled';
+} from './HomePage.styled.js';
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);

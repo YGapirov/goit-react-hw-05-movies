@@ -3,7 +3,7 @@ import css from './SearchBar.module.css';
 
 export const Searchbar = ({ onSubmit }) => {
   return (
-    <header className={css.Header}>
+    <div className={css.Div}>
       <Formik
         initialValues={{
           query: '',
@@ -27,6 +27,6 @@ export const Searchbar = ({ onSubmit }) => {
           />
         </Form>
       </Formik>
-    </header>
+    </div>
   );
 };
