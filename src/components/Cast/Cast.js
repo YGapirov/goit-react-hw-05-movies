@@ -27,8 +27,6 @@ export default function Cast() {
         setIsLoading(true);
         const fetchedCast = await getActorsMovies(params.movieId);
 
-        // console.log(fetchedCast);
-
         setCast(fetchedCast.cast);
       } catch (error) {
         setError(true);

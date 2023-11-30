@@ -16,6 +16,7 @@ import {
 } from './MovieDetailsPage.styled.js';
 
 import { ErrorMessage, LoadingMessage } from '../Homepage/HomePage.styled';
+import mainplaceholder from 'services/mainplaceholder.png';
 
 export default function MovieDetailsPage() {
   const location = useLocation();
@@ -64,7 +65,11 @@ export default function MovieDetailsPage() {
       {movie && (
         <DetailsContainer>
           <MovieImage
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : mainplaceholder
+            }
             alt={movie.title}
           />
           <MovieInfo>

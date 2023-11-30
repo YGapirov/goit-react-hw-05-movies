@@ -7,6 +7,8 @@ import {
   MovieTitle,
 } from './MoviesList.styled';
 
+import mainplaceholder from 'services/mainplaceholder.png';
+
 export const MoviesList = ({ films }) => {
   const location = useLocation();
 
@@ -19,7 +21,7 @@ export const MoviesList = ({ films }) => {
               src={
                 film.poster_path
                   ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
-                  : ''
+                  : mainplaceholder
               }
               alt={film.title}
             />
