@@ -1,10 +1,10 @@
-import { Searchbar } from 'components/Searchbar/SearchBar';
 import { useState } from 'react';
-// useSearchParams, useEffect;
+// import { useSearchParams } from 'react-router-dom';
+
 import { searchMovies } from 'services/api';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { Loader } from 'components/Loader/Loader';
-
+import { Searchbar } from 'components/Searchbar/SearchBar';
 import { StyleErrorMsg, StyledNotFound } from './MoviesPage.styled';
 
 export default function MoviesPage() {
@@ -13,11 +13,9 @@ export default function MoviesPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // const [params, setParams] = useSearchParams();
-  // const movieParam = params.get('movie') ?? '';
+  // const [params] = useSearchParams();
 
   const handleSearch = async query => {
-    // setParams({ movie: query });
     try {
       setIsLoading(true);
       const fetchedMovies = await searchMovies(query);
@@ -27,6 +25,7 @@ export default function MoviesPage() {
       } else {
         setError(null);
       }
+
       setSearchQuery(query);
       // Оновлення параметрів URL після пошуку
     } catch (error) {
