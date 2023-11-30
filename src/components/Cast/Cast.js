@@ -14,6 +14,8 @@ import {
   StyledInfo,
 } from './Cast.styled';
 
+import { StyledInfoMsg } from '../Reviews/Reviews.styled';
+
 export default function Cast() {
   const params = useParams();
 
@@ -62,6 +64,7 @@ export default function Cast() {
                     alt={actor.name}
                   />
                 )}
+
                 <StyledInfo>
                   <StyledName>{actor.name}</StyledName>
                   <StyledCharacter>
@@ -72,6 +75,11 @@ export default function Cast() {
             ))}
           </CastList>
         </InfoContainer>
+      )}
+      {cast.length === 0 && (
+        <StyledInfoMsg>
+          We don't have any actors for this movie yet.
+        </StyledInfoMsg>
       )}
     </>
   );
