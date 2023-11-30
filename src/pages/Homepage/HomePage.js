@@ -37,6 +37,7 @@ export default function HomePage() {
         </ErrorMessage>
       )}
       {isLoading && <LoadingMessage>Loading...</LoadingMessage>}
+
       {movies.length > 0 && <MoviesList films={movies} />}
     </div>
   );

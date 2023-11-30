@@ -1,6 +1,8 @@
-import { NavLink, Outlet, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 import { getDetailsMovies } from 'services/api';
+
+import { TiArrowBack } from 'react-icons/ti';
 
 import {
   DetailsContainer,
@@ -9,11 +11,17 @@ import {
   AdditionalInfo,
   MovieInfo,
   AddList,
+  StyledNavLink,
+  StyledBackLink,
 } from './MovieDetailsPage.styled.js';
 
 import { ErrorMessage, LoadingMessage } from '../Homepage/HomePage.styled';
 
 export default function MovieDetailsPage() {
+  const location = useLocation();
+  const backLinkRef = useRef(location);
+  // console.log(location);
+
   const params = useParams();
 
   const [movie, setMovie] = useState(null);
@@ -47,6 +55,12 @@ export default function MovieDetailsPage() {
         </ErrorMessage>
       )}
       {isLoading && <LoadingMessage>Loading...</LoadingMessage>}
+
+      <StyledBackLink to={backLinkRef.current.state?.from ?? '/'}>
+        <TiArrowBack style={{ verticalAlign: 'bottom' }} />
+        Go back
+      </StyledBackLink>
+
       {movie && (
         <DetailsContainer>
           <MovieImage
@@ -74,10 +88,10 @@ export default function MovieDetailsPage() {
         <h3>Additional information</h3>
         <ul>
           <AddList>
-            <NavLink to="cast">Cast</NavLink>
+            <StyledNavLink to="cast">Cast</StyledNavLink>
           </AddList>
           <AddList>
-            <NavLink to="reviews">Reviews</NavLink>
+            <StyledNavLink to="reviews">Reviews</StyledNavLink>
           </AddList>
         </ul>
       </AdditionalInfo>
